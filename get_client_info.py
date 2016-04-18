@@ -9,18 +9,15 @@ fileSecrets = open('secrets.config', 'r+')
 client_id = ""
 client_secret = ""
 	
-while True:
-	line = fileSecrets.readline()
-	if not line:
-		break;
+for line in fileSecrets:
 	try:
 		line.index('client_id=')
-		client_id = line.lstrip('client_id=').rstrip('\n')
+		client_id = line.lstrip('client_id=').rstrip()
 	except:
 		pass
 	try:
 		line.index('client_secret')
-		client_secret = line.lstrip('client_secret=').rstrip('\n')
+		client_secret = line.lstrip('client_secret=').rstrip()
 	except:
 		pass
 
@@ -34,3 +31,6 @@ if not client_secret:
 	client_secret = input();
 	strWrite = 'client_secret='+client_secret+'\n'
 	fileSecrets.write(strWrite)
+
+fileSecrets.close()
+
